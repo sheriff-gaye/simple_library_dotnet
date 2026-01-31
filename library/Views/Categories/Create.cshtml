@@ -1,0 +1,33 @@
+@model Library.Domain.Entities.Category
+@{
+    ViewData["Title"] = "Add New Category";
+}
+
+<div class="max-w-2xl mx-auto">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Add New Category</h1>
+
+    <form asp-action="Create" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="Name">
+                Category Name
+            </label>
+            <input asp-for="Name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="Name" type="text" required>
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="Description">
+                Description
+            </label>
+            <textarea asp-for="Description" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="Description" rows="4" required></textarea>
+        </div>
+
+        <div class="flex items-center justify-between">
+            <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                Add Category
+            </button>
+            <a href="/Categories" class="inline-block align-baseline font-bold text-sm text-green-600 hover:text-green-800">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>

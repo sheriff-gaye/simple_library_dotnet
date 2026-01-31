@@ -1,0 +1,57 @@
+@model IEnumerable<Library.Domain.Entities.Category>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<div class="mb-6 flex justify-between items-center">
+    <h1 class="text-3xl font-bold text-gray-800">Categories</h1>
+    <a href="/Categories/Create" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+        Add New Category
+    </a>
+</div>
+
+<div class="bg-white rounded-lg shadow overflow-hidden">
+    <table class="min-w-full">
+        <thead class="bg-gray-100">
+            <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    Name
+                </th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    Description
+                </th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    Actions
+                </th>
+            </tr>
+        </thead>
+
+        <tbody class="bg-white divide-y divide-gray-200">
+            @foreach (var category in Model)
+            {
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        @category.Name
+                    </td>
+
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        @category.Description
+                    </td>
+
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <a href="/Categories/Edit/@category.Id"
+                           class="text-blue-600 hover:text-blue-900 mr-3">
+                            Edit
+                        </a>
+                        <a href="/Categories/Delete/@category.Id"
+                           class="text-red-600 hover:text-red-900"
+                           onclick="return confirm('Are you sure?')">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

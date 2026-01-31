@@ -1,0 +1,32 @@
+<!-- WebUI/Views/Home/Index.cshtml -->
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center">
+    <h1 class="text-4xl font-bold text-gray-800 mb-4">Welcome to Library Management System</h1>
+    <p class="text-xl text-gray-600 mb-8">Manage your books, categories, and issues efficiently</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
+            <div class="text-5xl mb-4">📚</div>
+            <h2 class="text-2xl font-bold mb-2">Books</h2>
+            <p class="text-gray-600 mb-4">Manage your book collection</p>
+            <a href="/Book" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">View Books</a>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
+            <div class="text-5xl mb-4">📁</div>
+            <h2 class="text-2xl font-bold mb-2">Categories</h2>
+            <p class="text-gray-600 mb-4">Organize books by categories</p>
+            <a href="/Categories" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">View Categories</a>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
+            <div class="text-5xl mb-4">📋</div>
+            <h2 class="text-2xl font-bold mb-2">Issues</h2>
+            <p class="text-gray-600 mb-4">Track book issues and returns</p>
+            <a href="/Issues" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">View Issues</a>
+        </div>
+    </div>
+</div>

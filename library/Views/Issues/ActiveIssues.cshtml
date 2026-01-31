@@ -1,0 +1,54 @@
+<!-- WebUI/Views/Issues/ActiveIssues.cshtml -->
+@model List<Library.Domain.Entities.Issue>
+@{
+    ViewData["Title"] = "Active Issues";
+     var books = ViewBag.Books as List<Library.Domain.Entities.Book>;
+}
+
+
+<div class="mb-6">
+    <div class="flex justify-between items-center">
+        <h1 class="text-3xl font-bold text-gray-800">Active Issues</h1>
+        <a href="/Issues" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">View All Issues</a>
+    </div>
+</div>
+
+<div class="bg-white rounded-lg shadow overflow-hidden">
+    <table class="min-w-full">
+        <thead class="bg-gray-100">
+            <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Book Title</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Member Number</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Issue Date</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Days Issued</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            @foreach (var issue in Model)
+            {
+              
+                var book = books?.FirstOrDefault(b => b.Id == issue.BookId);
+    var daysIssued = (DateTime.Now - issue.IssueDate).Days;
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">@(book?.Title ?? "Unknown")</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">@issue.MemberNumber</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">@issue.IssueDate.ToString("MMM dd, yyyy")</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <span class="@(daysIssued > 14 ? "text-red-600 font-bold" : "")">@daysIssued days</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <a href="/Issues/ReturnBook/@issue.Id" class="text-green-600 hover:text-green-900 font-semibold">Return Book</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (Model.Count == 0)
+{
+    <div class="bg-white rounded-lg shadow-md p-12 text-center mt-4">
+        <p class="text-gray-500 text-lg">No active issues found. All books have been returned!</p>
+    </div>
+}

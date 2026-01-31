@@ -1,0 +1,36 @@
+
+@model Library.Models.IssueBookViewModel
+@{
+    ViewData["Title"] = "Issue Book";
+}
+
+<div class="max-w-2xl mx-auto">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Issue Book to Member</h1>
+
+    <form asp-action="IssueBook"   method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="BookId">
+                Select Book
+            </label>
+            <select asp-for="BookId" asp-items="ViewBag.Books" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="BookId" required>
+                <option value="">Select an available book</option>
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="MemberNumber">
+                Member Number
+            </label>
+            <input asp-for="MemberNumber" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="MemberNumber" type="text" placeholder="Enter member number" required>
+        </div>
+
+        <div class="flex items-center justify-between">
+            <button class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                Issue Book
+            </button>
+            <a href="/Issues" class="inline-block align-baseline font-bold text-sm text-purple-600 hover:text-purple-800">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>

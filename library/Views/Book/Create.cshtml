@@ -1,0 +1,56 @@
+@model Library.Domain.Entities.Book
+@{
+    ViewData["Title"] = "Add New Book";
+}
+
+<div class="max-w-2xl mx-auto">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Add New Book</h1>
+
+    <form asp-action="Create" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="Title">
+                Title
+            </label>
+            <input asp-for="Title" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="Title" type="text" required>
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="Author">
+                Author
+            </label>
+            <input asp-for="Author" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="Author" type="text" required>
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="ISBN">
+                ISBN
+            </label>
+            <input asp-for="ISBN" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="ISBN" type="text" required>
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="CategoryId">
+                Category
+            </label>
+            <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="CategoryId" required>
+                <option value="">Select a category</option>
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="PublishedDate">
+                Published Date
+            </label>
+            <input asp-for="PublishedDate" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="PublishedDate" type="date" required>
+        </div>
+
+        <div class="flex items-center justify-between">
+            <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                Add Book
+            </button>
+            <a href="/Books" class="inline-block align-baseline font-bold text-sm text-blue-600 hover:text-blue-800">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>

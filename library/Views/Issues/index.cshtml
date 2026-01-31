@@ -1,0 +1,69 @@
+<!-- WebUI/Views/Issues/Index.cshtml -->
+@model List<Library.Domain.Entities.Issue>
+@{
+    ViewData["Title"] = "Issues";
+    var books = ViewBag.Books as List<Library.Domain.Entities.Book>;
+}
+
+<div class="mb-6">
+    <div class="flex justify-between items-center mb-4">
+        <h1 class="text-3xl font-bold text-gray-800">Book Issues</h1>
+        <div class="space-x-2">
+            <a href="/Issues/IssueBook" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">Issue New Book</a>
+            <a href="/Issues/ActiveIssues" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Active Issues</a>
+        </div>
+    </div>
+
+    <form asp-action="SearchByMember" method="get" class="mb-4">
+        <div class="flex gap-2">
+            <input type="text" name="memberNumber" placeholder="Search by Member Number" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline flex-1" value="@ViewBag.MemberNumber">
+            <button type="submit" class="bg-gray-600 text-white px-6 py-2 rounded hover:bg-gray-700">Search</button>
+            <a href="/Issues" class="bg-gray-400 text-white px-6 py-2 rounded hover:bg-gray-500">Clear</a>
+        </div>
+    </form>
+</div>
+
+<div class="bg-white rounded-lg shadow overflow-hidden">
+    <table class="min-w-full">
+        <thead class="bg-gray-100">
+            <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Book Title</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Member Number</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Issue Date</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Return Date</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            @foreach (var issue in Model)
+            {
+                var book = books?.FirstOrDefault(b => b.Id == issue.BookId);
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">@(book?.Title ?? "Unknown")</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">@issue.MemberNumber</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">@issue.IssueDate.ToString("MMM dd, yyyy")</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">@(issue.ReturnDate?.ToString("MMM dd, yyyy") ?? "-")</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full @(issue.IsReturned ? "bg-green-100 text-green-800" : "bg-yellow-100 text-yellow-800")">
+                            @(issue.IsReturned ? "Returned" : "Active")
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        @if (!issue.IsReturned)
+                        {
+                            <a href="/Issues/ReturnBook/@issue.Id" class="text-green-600 hover:text-green-900">Return Book</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (Model.Count == 0)
+{
+    <div class="bg-white rounded-lg shadow-md p-12 text-center mt-4">
+        <p class="text-gray-500 text-lg">No issues found.</p>
+    </div>
+}
