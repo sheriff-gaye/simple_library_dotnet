@@ -21,9 +21,7 @@ namespace Library.Infrastructure.Repositories
         }
         public Book GetBookById(int id)
         {
-#pragma warning disable CS8603 // Possible null reference return.
             return _books.FirstOrDefault(b => b.Id == id);
-#pragma warning restore CS8603 // Possible null reference return.
         }
 
         public void Add(Book book)
