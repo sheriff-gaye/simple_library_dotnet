@@ -1,5 +1,3 @@
-
-
 @model IEnumerable<Library.Domain.Entities.Book>
 @{
     ViewData["Title"] = "Books";
@@ -26,7 +24,7 @@
         <tbody class="bg-white divide-y divide-gray-200">
             @foreach (var book in Model)
             {
-               
+
                 var category = categories?.FirstOrDefault(c => c.Id == book.CategoryId);
 
                 <tr>
@@ -35,13 +33,15 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">@book.ISBN</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">@(category?.Name ?? "N/A")</td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full @(book.IsAvailable ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800")">
+                        <span
+                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full @(book.IsAvailable ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800")">
                             @(book.IsAvailable ? "Available" : "Issued")
                         </span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <a href="/Book/Edit/@book.Id" class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
-                        <a href="/Book/Delete/@book.Id" class="text-red-600 hover:text-red-900" onclick="return confirm('Are you sure?')">Delete</a>
+                        <a href="/Book/Delete/@book.Id" class="text-red-600 hover:text-red-900"
+                            onclick="return confirm('Are you sure?')">Delete</a>
                     </td>
                 </tr>
             }
